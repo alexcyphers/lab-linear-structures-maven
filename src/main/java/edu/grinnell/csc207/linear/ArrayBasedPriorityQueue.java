@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
  * Priority queues implemented with arrays.
  *
  * @author Samuel A. Rebelsky
- * @author Your Name Here
+ * @author Alex Cyphers
  */
 public class ArrayBasedPriorityQueue<T> implements PriorityQueue<T> {
   // +--------+----------------------------------------------------------
@@ -70,7 +70,13 @@ public class ArrayBasedPriorityQueue<T> implements PriorityQueue<T> {
     if (this.isFull()) {
       throw new Exception("no more room!");
     } // this.isFull()
-    this.values[this.size++] = val;
+    int index = this.size;
+    while (order.compare(val, this.values[index]) > 0 && index > 0) {
+      this.values[index] = this.values[index - 1];
+      index--;
+    } // while-loop
+    this.values[index] = val;
+    this.size++;
   } // put(T)
 
   @Override
@@ -78,8 +84,12 @@ public class ArrayBasedPriorityQueue<T> implements PriorityQueue<T> {
     if (this.isEmpty()) {
       throw new Exception("empty");
     } // if empty
-    // STUB! Needs reimplmentation.
-    return this.values[--this.size];
+    T val = this.values[0];
+    for (int i = 0; i < this.size; i++) {
+      this.values[i - 1] = this.values[i];
+    } // for-loop
+    this.values[--this.size] = null;
+    return val;
   } // get(T)
 
   @Override

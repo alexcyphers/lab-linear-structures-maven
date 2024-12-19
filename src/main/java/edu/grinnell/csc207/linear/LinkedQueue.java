@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * A simple queue built with linked nodes.
  *
  * @author Samuel A. Rebelsky
- * @author Your Name Here
+ * @author Alex Cyphers
  */
 public class LinkedQueue<T> implements Queue<T> {
   // +--------+----------------------------------------------------------
